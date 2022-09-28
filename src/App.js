@@ -2,6 +2,7 @@ import { createAndShuffleWs, drawCardWs } from "./services/deck-ws";
 import "./App.css";
 import { useState, useEffect } from "react";
 import CardsAtDesk from "./components/CardsAtDesk";
+import SortedCards from "./components/SortedCards";
 
 function App() {
   const [deckID, setdeckID] = useState("");
@@ -10,6 +11,8 @@ function App() {
   ]);
   const [remainingCards, setremainingCards] = useState(52);
   const [showCards, setshowCards] = useState(false);
+  const [shuffle,setShuffle] = useState(true);
+  const [SortCards, setSortCards] = useState(false);
   /* // i need a button run that automates everything once you press the run button, 
   it will only stop until it has drawn a QUEEN of every suit
    Once you've drawn all of the QUEENS please display the results of the draw in the following way:
@@ -18,7 +21,7 @@ Show all of the cards that were drawn for each suit, and sort the cards by value
 
   const createAndShuffleDeck = () => {
     createAndShuffleWs().then((res) => {
-      console.log("cree un nuevo deck", res);
+     
       const { data } = res;
       setdeckID(data.deck_id); // zcc8owxe23xq
       setshowCards(true);
@@ -26,6 +29,7 @@ Show all of the cards that were drawn for each suit, and sort the cards by value
   };
 
   const getOneCard = () => {
+    if(shuffle){
     drawCardWs(deckID).then((res) => {
       const { data, status, errorMessage } = res;
 
@@ -39,7 +43,7 @@ Show all of the cards that were drawn for each suit, and sort the cards by value
         console.log(errorMessage);
       }
     });
-
+  }
   };
 
   useEffect(() => {
@@ -47,7 +51,20 @@ Show all of the cards that were drawn for each suit, and sort the cards by value
       if (remainingCards > 0) {
         getOneCard();
       }
-    }, "1000");
+    }, "500");//shall be 1000
+
+let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
+
+
+  if(queenAmount===4){
+    setShuffle(false)
+    return ()=>{
+      console.log("unmount")
+      setshowCards(false)
+      setSortCards(true)
+    }
+  }
+
   }, [remainingCards]);
 
   return (
@@ -61,6 +78,7 @@ Show all of the cards that were drawn for each suit, and sort the cards by value
       <button onClick={() => getOneCard()}>get One card from the deck</button>
       <h6>cards en mesa {remainingCards}</h6>
       {!showCards ? null : <CardsAtDesk cardData={cardData} />}
+      {!SortCards ? null : <SortedCards cardData={cardData} />}
     </div>
   );
 }

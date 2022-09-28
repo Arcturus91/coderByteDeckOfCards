@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 const CardsAtDesk = ({ cardData }) => {
-  console.log("soy card data", cardData);
+  
+ 
   let heartsSuit = cardData.filter((card) => card.suit === "HEARTS");
   let spadesSuit = cardData.filter((card) => card.suit === "SPADES");
   let clubsSuit = cardData.filter((card) => card.suit === "CLUBS");
   let diamondsSuit = cardData.filter((card) => card.suit === "DIAMONDS");
 
   let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
-  console.log(queenAmount)
+ 
   
 
   return (
