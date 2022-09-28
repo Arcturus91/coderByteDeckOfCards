@@ -3,6 +3,8 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import CardsAtDesk from "./components/CardsAtDesk";
 import SortedCards from "./components/SortedCards";
+import Button from '@mui/material/Button';
+import Footer from "./components/Footer"
 
 function App() {
   const [deckID, setdeckID] = useState("");
@@ -71,16 +73,27 @@ let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
     <div className="App">
       <h1>Bienvenido Fair Play</h1>
 
-      <button onClick={() => createAndShuffleDeck()}>
-        create deck and shuffle
-      </button>
 
-      <button onClick={() => getOneCard()}>get One card from the deck</button>
+
+      <Button variant="contained" onClick={() => createAndShuffleDeck()}>
+        create deck and shuffle
+      </Button>
+
+      <Button variant="contained" onClick={() => getOneCard()}>get One card from the deck</Button>
+
+
+
+
       <h6>cards en mesa {remainingCards}</h6>
       {!showCards ? null : <CardsAtDesk cardData={cardData} />}
       {!SortCards ? null : <SortedCards cardData={cardData} />}
+
+      <Footer/>
     </div>
   );
+
+  
 }
 
 export default App;
+
