@@ -5,6 +5,7 @@ import CardsAtDesk from "./components/CardsAtDesk";
 import SortedCards from "./components/SortedCards";
 import Button from '@mui/material/Button';
 import Footer from "./components/Footer"
+import Box from '@mui/material/Box';
 
 function App() {
   const [deckID, setdeckID] = useState("");
@@ -71,6 +72,15 @@ let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
 
   return (
     <div className="App">
+        <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '90vh',
+      }}
+    >
+
+    
       <h1>Bienvenido Fair Play</h1>
 
 
@@ -87,8 +97,10 @@ let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
       <h6>cards en mesa {remainingCards}</h6>
       {!showCards ? null : <CardsAtDesk cardData={cardData} />}
       {!SortCards ? null : <SortedCards cardData={cardData} />}
+</Box>
 
       <Footer/>
+      
     </div>
   );
 

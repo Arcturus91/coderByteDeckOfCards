@@ -1,4 +1,8 @@
-import { useEffect, useState } from "react";
+
+import * as React from 'react';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+
 const SortedCards = ({ cardData }) => {
 
 
@@ -35,7 +39,7 @@ const SortedCards = ({ cardData }) => {
   let clubsSuit = cardData.filter((card) => card.suit === "CLUBS").sort((a,b)=>a.value - b.value)
   let diamondsSuit = cardData.filter((card) => card.suit === "DIAMONDS").sort((a,b)=>a.value - b.value)
 
-  let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
+
  
   console.log("hearts sorted",heartsSuit)
   console.log("spadesSorted",spadesSuit)
@@ -45,47 +49,66 @@ const SortedCards = ({ cardData }) => {
 
   return (
     <div>
-    <div>Amount of queens {queenAmount}</div>
-    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
     
-      <div>
-        {heartsSuit.map((card) => {
-          return (
-            <div key={card.code}>
-              <img src={card.image} alt={card.code} />
-            </div>
-          );
-        })}
-      </div>
-      <div>
-        {spadesSuit.map((card) => {
-          return (
-            <div key={card.code}>
-              <img src={card.image} alt={card.code} />
-            </div>
-          );
-        })}
-      </div>
-      <div>
-        {clubsSuit.map((card) => {
-          return (
-            <div key={card.code}>
-              <img src={card.image} alt={card.code} />
-            </div>
-          );
-        })}
-      </div>
-      <div>
-        {diamondsSuit.map((card) => {
-          return (
-            <div key={card.code}>
-              <img src={card.image} alt={card.code} />
-            </div>
-          );
-        })}
-      </div>
-    </div>
-    </div>
+<div style={{ display: "flex", justifyContent: "space-evenly" }}>
+    <ImageList sx={{ width: 226, height: 1000 }} cols={1} rowHeight={164} >
+
+{heartsSuit.map((card) => (
+  <ImageListItem key={card.code}>
+    <img
+      src={`${card.image}?w=164&h=164&fit=crop&auto=format`}
+      srcSet={`${card.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+      alt={card.code}
+      loading="lazy"
+    />
+  </ImageListItem>
+))}
+</ImageList>
+
+<ImageList sx={{ width: 226, height: 1000 }} cols={1} rowHeight={164} >
+
+{spadesSuit.map((card) => (
+  <ImageListItem key={card.code}>
+    <img
+      src={`${card.image}?w=164&h=164&fit=crop&auto=format`}
+      srcSet={`${card.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+      alt={card.code}
+      loading="lazy"
+    />
+  </ImageListItem>
+))}
+</ImageList>
+
+<ImageList sx={{ width: 226, height: 1000 }} cols={1} rowHeight={164} >
+
+{clubsSuit.map((card) => (
+  <ImageListItem key={card.code}>
+    <img
+      src={`${card.image}?w=164&h=164&fit=crop&auto=format`}
+      srcSet={`${card.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+      alt={card.code}
+      loading="lazy"
+    />
+  </ImageListItem>
+))}
+</ImageList>
+
+<ImageList sx={{ width: 226, height: 1000 }} cols={1} rowHeight={164} >
+
+{diamondsSuit.map((card) => (
+  <ImageListItem key={card.code}>
+    <img
+      src={`${card.image}?w=164&h=164&fit=crop&auto=format`}
+      srcSet={`${card.image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+      alt={card.code}
+      loading="lazy"
+    />
+  </ImageListItem>
+))}
+</ImageList>
+</div>
+</div>
+    
   );
 };
 
