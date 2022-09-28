@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 const SortedCards = ({ cardData }) => {
 
 
-  console.log("entre",cardData)
 
   cardData.forEach(element => {
    /*  if(element.value !== "ACE" || element.value !== "QUEEN" || element.value !== "KING" || element.value !== "JACK"){
@@ -42,11 +41,7 @@ const SortedCards = ({ cardData }) => {
   let diamondsSuit = cardData.filter((card) => card.suit === "DIAMONDS").sort((a,b)=>b.value - a.value)
 
 
- 
-  console.log("hearts sorted",heartsSuit)
-  console.log("spadesSorted",spadesSuit)
-  console.log("clubSorted", clubsSuit)
-  console.log("diamondSorted",diamondsSuit)
+
   
 
   return (

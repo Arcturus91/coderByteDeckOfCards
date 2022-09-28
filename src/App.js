@@ -66,7 +66,6 @@ let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
   if(queenAmount===4){
     setShuffle(false)
     return ()=>{
-      console.log("unmount")
       setshowCards(false)
       setSortCards(true)
     }
