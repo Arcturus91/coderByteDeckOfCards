@@ -1,7 +1,9 @@
 
-import * as React from 'react';
+
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress'
 
 const CardsAtDesk = ({ cardData }) => {
   
@@ -17,7 +19,15 @@ const CardsAtDesk = ({ cardData }) => {
 
   return (
     <div>
-    <div>Amount of queens {queenAmount}</div>
+
+<>
+<Typography variant="h6" color="white">
+Reinas encontradas: {queenAmount}. <span style={{color:"red"}}>Estado: Juego en curso.</span> <CircularProgress />
+      </Typography>
+      </>
+
+
+
 <div style={{ display: "flex", justifyContent: "space-evenly" }}>
     <ImageList sx={{ width: 226, height: 1000 }} cols={1} rowHeight={164} >
 

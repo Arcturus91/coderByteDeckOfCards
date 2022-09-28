@@ -1,7 +1,9 @@
 
-import * as React from 'react';
+
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import CheckIcon from '@mui/icons-material/Check';
+import Typography from '@mui/material/Typography';
 
 const SortedCards = ({ cardData }) => {
 
@@ -34,10 +36,10 @@ const SortedCards = ({ cardData }) => {
     }
   });
  
-  let heartsSuit = cardData.filter((card) => card.suit === "HEARTS").sort((a,b)=>a.value - b.value);
-  let spadesSuit = cardData.filter((card) => card.suit === "SPADES").sort((a,b)=>a.value - b.value)
-  let clubsSuit = cardData.filter((card) => card.suit === "CLUBS").sort((a,b)=>a.value - b.value)
-  let diamondsSuit = cardData.filter((card) => card.suit === "DIAMONDS").sort((a,b)=>a.value - b.value)
+  let heartsSuit = cardData.filter((card) => card.suit === "HEARTS").sort((a,b)=>b.value - a.value);
+  let spadesSuit = cardData.filter((card) => card.suit === "SPADES").sort((a,b)=>b.value - a.value)
+  let clubsSuit = cardData.filter((card) => card.suit === "CLUBS").sort((a,b)=>b.value - a.value)
+  let diamondsSuit = cardData.filter((card) => card.suit === "DIAMONDS").sort((a,b)=>b.value - a.value)
 
 
  
@@ -49,6 +51,12 @@ const SortedCards = ({ cardData }) => {
 
   return (
     <div>
+
+<>
+<Typography variant="h6" color="white">
+<span style={{color:"red"}}>Estado: Juego terminado.</span> <CheckIcon />
+      </Typography>
+      </>
     
 <div style={{ display: "flex", justifyContent: "space-evenly" }}>
     <ImageList sx={{ width: 226, height: 1000 }} cols={1} rowHeight={164} >

@@ -6,6 +6,9 @@ import SortedCards from "./components/SortedCards";
 import Button from '@mui/material/Button';
 import Footer from "./components/Footer"
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 function App() {
   const [deckID, setdeckID] = useState("");
@@ -16,24 +19,25 @@ function App() {
   const [showCards, setshowCards] = useState(false);
   const [shuffle,setShuffle] = useState(true);
   const [SortCards, setSortCards] = useState(false);
-  /* // i need a button run that automates everything once you press the run button, 
-  it will only stop until it has drawn a QUEEN of every suit
-   Once you've drawn all of the QUEENS please display the results of the draw in the following way:
-Show all of the cards that were drawn for each suit, and sort the cards by value (Aces are high)
- Example: Hearts: [2, 3, 7, Jack, Queen] */
+  const [startGame, setStartGame] = useState(false);
+
 
   const createAndShuffleDeck = () => {
     createAndShuffleWs().then((res) => {
      
       const { data } = res;
+
       setdeckID(data.deck_id); // zcc8owxe23xq
       setshowCards(true);
-    });
+      setStartGame(true)
+      return data
+    }).then((data)=>getOneCard (data))
   };
 
-  const getOneCard = () => {
+  const getOneCard = (data) => {
+    
     if(shuffle){
-    drawCardWs(deckID).then((res) => {
+    drawCardWs(deckID || data.deck_id).then((res) => {
       const { data, status, errorMessage } = res;
 
       if (status) {
@@ -54,7 +58,7 @@ Show all of the cards that were drawn for each suit, and sort the cards by value
       if (remainingCards > 0) {
         getOneCard();
       }
-    }, "500");//shall be 1000
+    }, "1000");//shall be 1000
 
 let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
 
@@ -77,24 +81,41 @@ let queenAmount = cardData.filter(card=>card.value==="QUEEN").length
         display: 'flex',
         flexDirection: 'column',
         minHeight: '90vh',
+        
       }}
     >
+<Typography variant="h1" color="white">
+      Bienvenido Fair Play
+      </Typography>
 
-    
-      <h1>Bienvenido Fair Play</h1>
 
-
-
+      {startGame ? null :
+<Container>
       <Button variant="contained" onClick={() => createAndShuffleDeck()}>
-        create deck and shuffle
+        Comienza el juego <PlayArrowIcon sx={{ height: 38, width: 38 }} />
       </Button>
-
-      <Button variant="contained" onClick={() => getOneCard()}>get One card from the deck</Button>
-
+</Container>}
 
 
 
-      <h6>cards en mesa {remainingCards}</h6>
+{!showCards ? null :
+
+<>
+<Typography variant="h6" color="white">
+Cartas restantes en mesa {remainingCards}
+      </Typography>
+      </>
+}
+
+{!SortCards ? null :
+
+<>
+<Typography variant="h6" color="white">
+Cartas restantes en mesa {remainingCards}
+      </Typography>
+      </>
+}
+
       {!showCards ? null : <CardsAtDesk cardData={cardData} />}
       {!SortCards ? null : <SortedCards cardData={cardData} />}
 </Box>
